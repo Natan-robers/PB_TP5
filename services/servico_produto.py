@@ -7,7 +7,6 @@ def importar_produtos_csv_para_bd():
     import os
     caminho_csv = caminho_produtos_csv()
     
-    # Verifica se o arquivo existe
     if not os.path.exists(caminho_csv):
         print(f"AVISO: Arquivo CSV não encontrado: {caminho_csv}")
         print("O arquivo será criado na próxima execução do web scraping.")
@@ -44,14 +43,10 @@ def importar_produtos_csv_para_bd():
         if nome is None:
             nome = str(row.get(df.columns[0], 'Produto'))
         
-        # Ignora apenas produtos com nome completamente vazio
-        # Nota: Produtos com nome "Valor" ou outros nomes genéricos serão importados
-        # pois podem ser produtos válidos do web scraping
         if not nome or nome.strip() == '':
             produtos_ignorados += 1
             continue
         
-        # Se o nome for muito genérico, tenta melhorar usando o ID
         if nome.lower() in ['valor', 'produto']:
             nome = f"Produto {id_val}"
         
@@ -59,7 +54,7 @@ def importar_produtos_csv_para_bd():
         for col in ['quantidade','quant','qtd']:
             if col in df.columns:
                 try:
-                    qtd = int(row[col])
+                qtd = int(row[col])
                 except (ValueError, TypeError):
                     qtd = 0
                 break
@@ -68,12 +63,11 @@ def importar_produtos_csv_para_bd():
         for col in ['preco','preço','valor']:
             if col in df.columns:
                 try:
-                    preco = float(row[col])
+                preco = float(row[col])
                 except (ValueError, TypeError):
                     preco = 0.0
                 break
         
-        # Verifica se o produto já existe
         from data.repositorio_produto import obter_produto_por_id
         produto_existente = obter_produto_por_id(int(id_val))
         
@@ -90,8 +84,6 @@ def importar_produtos_csv_para_bd():
     print(f"  - {produtos_atualizados} produtos atualizados")
     print(f"  - {produtos_ignorados} produtos ignorados (não foram salvos no banco)")
     
-    # Verifica quantos produtos estão no banco
-    # NOTA: Produtos ignorados NÃO são salvos, então não entram nesta contagem
     from data.repositorio_produto import contar_produtos, listar_todos_produtos
     total_produtos = contar_produtos()
     produtos_validos = produtos_importados + produtos_atualizados
@@ -100,14 +92,12 @@ def importar_produtos_csv_para_bd():
     print(f"  - Total de produtos válidos no banco: {total_produtos}")
     print(f"  - Produtos processados nesta importação: {produtos_validos} (ignorados não são salvos)")
     
-    # Alerta sobre discrepância entre CSV e banco
     if total_produtos > produtos_no_csv:
         diferenca = total_produtos - produtos_no_csv
         print(f"\n  ⚠️  AVISO: O banco tem {total_produtos} produtos, mas o CSV tem apenas {produtos_no_csv}.")
         print(f"     Isso significa que há {diferenca} produto(s) antigo(s) no banco de execuções anteriores.")
         print(f"     O CSV foi atualizado com menos produtos, mas os antigos permanecem no banco.")
     
-    # Mostra uma amostra dos produtos importados
     if total_produtos > 0:
         print("\nAmostra dos produtos no banco (primeiros 10):")
         produtos = listar_todos_produtos()

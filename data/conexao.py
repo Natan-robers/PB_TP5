@@ -11,21 +11,18 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 
-# Sessão única para toda a aplicação
 _session = None
 
 def inicializar_banco(Base):
     Base.metadata.create_all(bind=engine)
 
 def obter_sessao():
-    """Retorna a sessão única da aplicação"""
     global _session
     if _session is None:
         _session = SessionLocal()
     return _session
 
 def fechar_sessao():
-    """Fecha a sessão única da aplicação"""
     global _session
     if _session is not None:
         _session.close()

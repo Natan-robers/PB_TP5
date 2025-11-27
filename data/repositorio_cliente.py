@@ -13,10 +13,13 @@ def salvar_cliente(nome=None):
     session = obter_sessao()
     c = Cliente(nome=nome or "Cliente")
     session.add(c)
-    session.flush()          # Força geração do ID no SQLite
-    session.refresh(c)       # Atualiza o objeto com o ID
-    # Se nome não foi fornecido ou é "Cliente", atualiza com o ID gerado
+    session.flush()
+    session.refresh(c)
     if nome is None or nome == "Cliente":
         c.nome = f"Cliente {c.id}"
-    session.commit()         # Commit após salvar
-    return c.id              # ✅ return é SOMENTE o número
+    session.commit()
+    return c.id
+
+def listar_todos_clientes():
+    session = obter_sessao()
+    return session.query(Cliente).order_by(Cliente.nome).all()

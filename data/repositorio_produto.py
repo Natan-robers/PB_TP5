@@ -25,14 +25,12 @@ def decrementar_estoque(id_produto, quantidade):
     p = session.query(Produto).filter(Produto.id == id_produto).first()
     if p:
         p.quantidade = max(0, p.quantidade - quantidade)
-        session.commit()
+    session.commit()
 
 def listar_todos_produtos():
-    """Lista todos os produtos do banco de dados"""
     session = obter_sessao()
     return session.query(Produto).order_by(Produto.id).all()
 
 def contar_produtos():
-    """Retorna o total de produtos no banco"""
     session = obter_sessao()
     return session.query(Produto).count()

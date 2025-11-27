@@ -4,10 +4,9 @@ def solicitar_id_cliente():
     while True:
         try:
             raw = input("Entre com o ID do cliente: ").strip()
-            try:
-                return int(raw)
-            except ValueError:
-                print('ID inválido. Digite um número.')
+            return int(raw)
+        except ValueError:
+            print('ID inválido. Digite um número.')
         except KeyboardInterrupt:
             raise
 
