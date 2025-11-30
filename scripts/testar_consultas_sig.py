@@ -15,12 +15,12 @@ def testar_consultas_sig():
     sucessos = []
     
     try:
-        from data.conexao import inicializar_banco, obter_sessao, fechar_sessao
-        from data.modelos import Base, Cliente, Compra, Item, Produto, Fornecedor
-        from data.repositorio_cliente import listar_todos_clientes, obter_cliente_por_id
-        from data.repositorio_compra import obter_compras_por_cliente, obter_total_compra, obter_compra_por_id, obter_itens_compra
-        from data.repositorio_produto import listar_todos_produtos, obter_produto_por_id
-        from data.repositorio_fornecedor import listar_todos_fornecedores, obter_fornecedores_produto
+        from dados.conexao import inicializar_banco, obter_sessao, fechar_sessao
+        from dados.modelos import Base, Cliente, Compra, Item, Produto, Fornecedor
+        from dados.repositorio_cliente import listar_todos_clientes, obter_cliente_por_id
+        from dados.repositorio_compra import obter_compras_por_cliente, obter_total_compra, obter_compra_por_id, obter_itens_compra
+        from dados.repositorio_produto import listar_todos_produtos, obter_produto_por_id
+        from dados.repositorio_fornecedor import listar_todos_fornecedores, obter_fornecedores_produto
         from sqlalchemy import func
         
         inicializar_banco(Base)

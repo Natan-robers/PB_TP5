@@ -1,6 +1,6 @@
 import requests, re, pandas as pd
 from bs4 import BeautifulSoup
-from utils.arquivos import caminho_produtos_csv, caminho_produtos_url
+from utilidades.arquivos import caminho_produtos_csv, caminho_produtos_url
 
 def extrair_produtos_flexivel(html_text):
     soup = BeautifulSoup(html_text, "html.parser")

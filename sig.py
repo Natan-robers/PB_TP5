@@ -1,7 +1,7 @@
-from data.conexao import inicializar_banco, fechar_sessao, obter_sessao
-from data.modelos import Base
-from services.sig.servico_excel import carregar_dados_excel
-from views.sig.menu_principal import menu_principal_sig
+from dados.conexao import inicializar_banco, fechar_sessao, obter_sessao
+from dados.modelos import Base
+from servicos.sig.servico_excel import carregar_dados_excel
+from visualizacoes.sig.menu_principal import menu_principal_sig
 
 def principal():
     try:

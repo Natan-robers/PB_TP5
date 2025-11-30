@@ -1,9 +1,9 @@
-from data.conexao import inicializar_banco, obter_sessao, fechar_sessao
-from data.modelos import Base, Cliente, Fornecedor, Compra, Item
-from data.repositorio_cliente import salvar_cliente, obter_cliente_por_id
-from data.repositorio_fornecedor import salvar_fornecedor, associar_produto_fornecedor
-from data.repositorio_produto import listar_todos_produtos, obter_produto_por_id
-from data.repositorio_compra import criar_compra, adicionar_item_compra
+from dados.conexao import inicializar_banco, obter_sessao, fechar_sessao
+from dados.modelos import Base, Cliente, Fornecedor, Compra, Item
+from dados.repositorio_cliente import salvar_cliente, obter_cliente_por_id
+from dados.repositorio_fornecedor import salvar_fornecedor, associar_produto_fornecedor
+from dados.repositorio_produto import listar_todos_produtos, obter_produto_por_id
+from dados.repositorio_compra import criar_compra, adicionar_item_compra
 from datetime import datetime, timedelta
 
 def popular_banco_teste():

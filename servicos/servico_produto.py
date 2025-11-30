@@ -1,7 +1,7 @@
 import pandas as pd
-from data.repositorio_produto import salvar_ou_atualizar_produto
-from data.modelos import Produto
-from utils.arquivos import caminho_produtos_csv
+from dados.repositorio_produto import salvar_ou_atualizar_produto
+from dados.modelos import Produto
+from utilidades.arquivos import caminho_produtos_csv
 
 def importar_produtos_csv_para_bd():
     import os
@@ -68,7 +68,7 @@ def importar_produtos_csv_para_bd():
                     preco = 0.0
                 break
         
-        from data.repositorio_produto import obter_produto_por_id
+        from dados.repositorio_produto import obter_produto_por_id
         produto_existente = obter_produto_por_id(int(id_val))
         
         produto = Produto(id=int(id_val), nome=str(nome), quantidade=int(qtd), preco=float(preco))
@@ -84,7 +84,7 @@ def importar_produtos_csv_para_bd():
     print(f"  - {produtos_atualizados} produtos atualizados")
     print(f"  - {produtos_ignorados} produtos ignorados (não foram salvos no banco)")
     
-    from data.repositorio_produto import contar_produtos, listar_todos_produtos
+    from dados.repositorio_produto import contar_produtos, listar_todos_produtos
     total_produtos = contar_produtos()
     produtos_validos = produtos_importados + produtos_atualizados
     produtos_no_csv = len(df)

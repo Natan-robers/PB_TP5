@@ -1,4 +1,4 @@
-from data.repositorio_produto import obter_produto_por_id
+from dados.repositorio_produto import obter_produto_por_id
 
 def solicitar_id_cliente():
     while True:

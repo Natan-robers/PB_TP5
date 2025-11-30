@@ -1,14 +1,14 @@
-from data.repositorio_produto import (
+from dados.repositorio_produto import (
     listar_todos_produtos, obter_produto_por_id, salvar_ou_atualizar_produto,
     buscar_produtos_sem_estoque
 )
-from data.repositorio_fornecedor import (
+from dados.repositorio_fornecedor import (
     listar_todos_fornecedores, obter_fornecedores_produto,
     associar_produto_fornecedor, remover_associacao_produto_fornecedor
 )
-from data.modelos import Produto
-from data.conexao import obter_sessao
-from data.modelos import Item
+from dados.modelos import Produto
+from dados.conexao import obter_sessao
+from dados.modelos import Item
 from sqlalchemy import func
 
 def menu_produtos():

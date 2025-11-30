@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 def criar_arquivo_fornecedores():
     df_fornecedores = pd.DataFrame({
@@ -15,11 +16,17 @@ def criar_arquivo_fornecedores():
         'id_fornecedor': [1, 1, 2, 2, 3]
     })
     
-    with pd.ExcelWriter('fornecedores.xlsx', engine='openpyxl') as writer:
+    # Criar pasta recursos se não existir
+    diretorio_recursos = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'recursos')
+    os.makedirs(diretorio_recursos, exist_ok=True)
+    
+    caminho_excel = os.path.join(diretorio_recursos, 'fornecedores.xlsx')
+    
+    with pd.ExcelWriter(caminho_excel, engine='openpyxl') as writer:
         df_fornecedores.to_excel(writer, sheet_name='fornecedores', index=False)
         df_produtos_fornecedores.to_excel(writer, sheet_name='produtos-fornecedores', index=False)
     
-    print("Arquivo fornecedores.xlsx criado com sucesso!")
+    print(f"Arquivo {caminho_excel} criado com sucesso!")
     print("\nEstrutura criada:")
     print("- Aba 'fornecedores':", len(df_fornecedores), "fornecedores")
     print("- Aba 'produtos-fornecedores':", len(df_produtos_fornecedores), "associacoes")

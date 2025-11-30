@@ -1,3 +1,6 @@
+-- Script SQL para criação do banco de dados mercado.db
+-- Modelagem Física do TP5
+
 -- Tabela Cliente
 CREATE TABLE IF NOT EXISTS cliente (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,7 +40,7 @@ CREATE TABLE IF NOT EXISTS item (
     FOREIGN KEY (id_produto) REFERENCES produto(id)
 );
 
--- Tabela  N:N entre Produto e Fornecedor
+-- Tabela de relacionamento N:N entre Produto e Fornecedor
 CREATE TABLE IF NOT EXISTS produto_fornecedor (
     id_produto INTEGER NOT NULL,
     id_fornecedor INTEGER NOT NULL,
@@ -46,7 +49,7 @@ CREATE TABLE IF NOT EXISTS produto_fornecedor (
     FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id)
 );
 
--- Índices para  performance
+-- Índices para melhorar performance
 CREATE INDEX IF NOT EXISTS idx_compra_cliente ON compra(id_cliente);
 CREATE INDEX IF NOT EXISTS idx_compra_data ON compra(data_hora);
 CREATE INDEX IF NOT EXISTS idx_item_compra ON item(id_compra);

@@ -1,5 +1,5 @@
-from data.conexao import obter_sessao
-from data.modelos import Cliente
+from dados.conexao import obter_sessao
+from dados.modelos import Cliente
 
 def obter_cliente_por_id(id_cliente):
     session = obter_sessao()

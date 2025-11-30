@@ -1,15 +1,16 @@
 import pandas as pd
 import os
-from data.repositorio_fornecedor import salvar_fornecedor, obter_fornecedor_por_nome, obter_fornecedor_por_id, associar_produto_fornecedor
-from data.repositorio_produto import obter_produto_por_id
-from utils.arquivos import caminho_excel_fornecedores
+from dados.repositorio_fornecedor import salvar_fornecedor, obter_fornecedor_por_nome, obter_fornecedor_por_id, associar_produto_fornecedor
+from dados.repositorio_produto import obter_produto_por_id
+from utilidades.arquivos import caminho_excel_fornecedores
 
 def carregar_dados_excel():
     caminho = caminho_excel_fornecedores()
     
     if not os.path.exists(caminho):
         print(f"AVISO: Arquivo Excel não encontrado: {caminho}")
-        print("Crie o arquivo 'fornecedores.xlsx' com as abas 'fornecedores' e 'produtos-fornecedores'")
+        print("Crie o arquivo 'recursos/fornecedores.xlsx' com as abas 'fornecedores' e 'produtos-fornecedores'")
+        print("Ou execute: python scripts/criar_fornecedores_excel.py")
         return
     
     try:

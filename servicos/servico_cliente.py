@@ -1,6 +1,6 @@
 import pandas as pd
-from utils.arquivos import caminho_clientes_json
-from data.repositorio_cliente import buscar_cliente_por_nome, salvar_cliente
+from utilidades.arquivos import caminho_clientes_json
+from dados.repositorio_cliente import buscar_cliente_por_nome, salvar_cliente
 
 def carregar_clientes_iniciais():
     path = caminho_clientes_json()

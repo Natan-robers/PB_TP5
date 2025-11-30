@@ -204,32 +204,37 @@ Compra 11 registrada. Estoque atualizado e atendimento finalizado.
 mercado_tp4/
 ├── app.py                          # Aplicação do Caixa
 ├── sig.py                          # Aplicação SIG
-├── popular_banco_teste.py          # Script para popular dados de teste
-├── criar_fornecedores_excel.py    # Script para criar fornecedores.xlsx
-├── data/
-│   ├── conexao.py                 # Gerenciamento de sessão única
-│   ├── modelos.py                 # Modelos SQLAlchemy
-│   └── repositorio_*.py           # Repositórios de dados
-├── services/
-│   ├── servico_cliente.py         # Serviços de cliente
-│   ├── servico_produto.py         # Serviços de produto
+├── scripts/
+│   ├── popular_banco_teste.py      # Script para popular dados de teste
+│   ├── criar_fornecedores_excel.py  # Script para criar fornecedores.xlsx
+│   └── testar_consultas_sig.py     # Script de teste automatizado
+├── dados/
+│   ├── conexao.py                  # Gerenciamento de sessão única
+│   ├── modelos.py                  # Modelos SQLAlchemy
+│   └── repositorio_*.py            # Repositórios de dados
+├── servicos/
+│   ├── servico_cliente.py          # Serviços de cliente
+│   ├── servico_produto.py          # Serviços de produto
 │   ├── servico_scraping.py         # Web scraping
 │   ├── servico_atendimento.py      # Lógica de atendimento
 │   └── sig/
 │       └── servico_excel.py        # Carregamento de Excel
-├── views/
+├── visualizacoes/
 │   ├── menu_caixa.py               # Menu do caixa
 │   ├── interface_console.py        # Interface console
 │   └── sig/
 │       ├── menu_principal.py       # Menu principal SIG
 │       ├── menu_clientes.py        # Menu de clientes
-│       └── menu_produtos.py         # Menu de produtos
-├── utils/
-│   └── arquivos.py                 # Utilitários de arquivos
-├── clientes.json                   # Arquivo JSON com clientes iniciais
-├── produtos.csv                    # Arquivo CSV gerado pelo scraping
-├── fornecedores.xlsx               # Arquivo Excel com fornecedores
-└── mercado.db                      # Banco de dados SQLite
+│       └── menu_produtos.py        # Menu de produtos
+├── utilidades/
+│   ├── arquivos.py                 # Utilitários de arquivos
+│   └── validacoes.py               # Validações
+└── recursos/
+    ├── clientes.json               # Arquivo JSON com clientes iniciais
+    ├── produtos.csv                # Arquivo CSV gerado pelo scraping
+    ├── fornecedores.xlsx           # Arquivo Excel com fornecedores
+    ├── mercado.db                  # Banco de dados SQLite
+    └── modelagem_fisica.sql        # Script SQL de modelagem
 ```
 
 ---
@@ -285,15 +290,16 @@ mercado_tp4/
    - Use o SIG para ver os produtos disponíveis
 
 4. **Fornecedores:**
-   - O arquivo `fornecedores.xlsx` é carregado automaticamente pelo SIG
+   - O arquivo `recursos/fornecedores.xlsx` é carregado automaticamente pelo SIG
    - Se não existir, o sistema avisará mas continuará funcionando
+   - Use `scripts/criar_fornecedores_excel.py` para criar o arquivo
 
 ---
 
 ## 📝 Notas Finais
 
 - O sistema utiliza uma **sessão única** de banco de dados (conforme Rubric 0 do TP4)
-- Todos os dados são persistidos no arquivo `mercado.db`
+- Todos os dados são persistidos no arquivo `recursos/mercado.db`
 - O sistema suporta tratamento de erros e interrupções (Ctrl+C)
 - Os nomes das funções estão em português (pt-BR)
 

@@ -1,8 +1,8 @@
 import pandas as pd
-from data.repositorio_cliente import obter_cliente_por_id, salvar_cliente
-from data.repositorio_produto import decrementar_estoque
-from data.repositorio_compra import criar_compra, adicionar_item_compra
-from views.interface_console import solicitar_id_cliente, solicitar_id_produto_e_quantidade, exibir_nota_fiscal
+from dados.repositorio_cliente import obter_cliente_por_id, salvar_cliente
+from dados.repositorio_produto import decrementar_estoque
+from dados.repositorio_compra import criar_compra, adicionar_item_compra
+from visualizacoes.interface_console import solicitar_id_cliente, solicitar_id_produto_e_quantidade, exibir_nota_fiscal
 
 def processar_atendimento_loop():
     while True:
@@ -15,17 +15,17 @@ def processar_atendimento_loop():
             break
         
         try:
-            cid = solicitar_id_cliente()
-            cliente = obter_cliente_por_id(int(cid))
+            id_cliente = solicitar_id_cliente()
+            cliente = obter_cliente_por_id(int(id_cliente))
             if not cliente:
                 novo_id = salvar_cliente()
-                cid = novo_id
+                id_cliente = novo_id
                 print(f'Cliente cadastrado com id {novo_id}')
                 cliente = obter_cliente_por_id(novo_id)
             else:
-                cid = int(cid)
+                id_cliente = int(id_cliente)
 
-            id_compra = criar_compra(cid)
+            id_compra = criar_compra(id_cliente)
             print(f'Compra {id_compra} iniciada.')
 
             carrinho = []
@@ -43,16 +43,16 @@ def processar_atendimento_loop():
                 print('Atendimento cancelado (nenhum item).')
                 continue
 
-            df = pd.DataFrame(carrinho)
-            grouped = df.groupby(['id','nome','preco'], as_index=False).agg({'quantidade':'sum'})
-            grouped['total'] = grouped['quantidade'] * grouped['preco']
+            df_carrinho = pd.DataFrame(carrinho)
+            df_agrupado = df_carrinho.groupby(['id','nome','preco'], as_index=False).agg({'quantidade':'sum'})
+            df_agrupado['total'] = df_agrupado['quantidade'] * df_agrupado['preco']
 
-            exibir_nota_fiscal(grouped, cliente)
+            exibir_nota_fiscal(df_agrupado, cliente)
 
-            for _, row in grouped.iterrows():
-                id_produto = int(row['id'])
-                quantidade = int(row['quantidade'])
-                preco = float(row['preco'])
+            for _, linha in df_agrupado.iterrows():
+                id_produto = int(linha['id'])
+                quantidade = int(linha['quantidade'])
+                preco = float(linha['preco'])
                 adicionar_item_compra(id_compra, id_produto, quantidade, preco)
                 decrementar_estoque(id_produto, quantidade)
 

@@ -1,5 +1,5 @@
-from data.conexao import obter_sessao
-from data.modelos import Compra, Item
+from dados.conexao import obter_sessao
+from dados.modelos import Compra, Item
 from datetime import datetime
 
 def criar_compra(id_cliente):

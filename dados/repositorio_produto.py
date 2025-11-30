@@ -1,5 +1,5 @@
-from data.conexao import obter_sessao
-from data.modelos import Produto
+from dados.conexao import obter_sessao
+from dados.modelos import Produto
 
 def obter_produto_por_id(id_produto):
     session = obter_sessao()

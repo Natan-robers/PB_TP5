@@ -1,5 +1,5 @@
-from views.sig.menu_clientes import menu_clientes
-from views.sig.menu_produtos import menu_produtos
+from visualizacoes.sig.menu_clientes import menu_clientes
+from visualizacoes.sig.menu_produtos import menu_produtos
 
 def menu_principal_sig():
     while True:

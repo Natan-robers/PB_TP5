@@ -1,7 +1,7 @@
-from data.repositorio_cliente import listar_todos_clientes, obter_cliente_por_id
-from data.repositorio_compra import obter_compras_por_cliente, obter_itens_compra, obter_total_compra
-from data.conexao import obter_sessao
-from data.modelos import Cliente, Compra
+from dados.repositorio_cliente import listar_todos_clientes, obter_cliente_por_id
+from dados.repositorio_compra import obter_compras_por_cliente, obter_itens_compra, obter_total_compra
+from dados.conexao import obter_sessao
+from dados.modelos import Cliente, Compra
 from sqlalchemy import func
 
 def menu_clientes():
@@ -100,7 +100,7 @@ def consultar_compras_cliente():
         print(f"Erro: {e}")
 
 def exibir_nota_fiscal_compra(id_compra):
-    from data.repositorio_compra import obter_compra_por_id
+    from dados.repositorio_compra import obter_compra_por_id
     
     compra = obter_compra_por_id(id_compra)
     if not compra:
@@ -153,7 +153,7 @@ def clientes_que_mais_compram():
 
 def clientes_que_mais_gastam():
     session = obter_sessao()
-    from data.modelos import Item
+    from dados.modelos import Item
     
     resultado = session.query(
         Cliente.id,

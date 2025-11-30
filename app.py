@@ -1,10 +1,10 @@
-from data.conexao import inicializar_banco, fechar_sessao, obter_sessao
-from data.modelos import Base
-from services.servico_cliente import carregar_clientes_iniciais
-from services.servico_produto import importar_produtos_csv_para_bd
-from services.servico_scraping import executar_scraping_e_gerar_csv
-from views.menu_caixa import menu_abrir_caixa
-from services.servico_atendimento import processar_atendimento_loop
+from dados.conexao import inicializar_banco, fechar_sessao, obter_sessao
+from dados.modelos import Base
+from servicos.servico_cliente import carregar_clientes_iniciais
+from servicos.servico_produto import importar_produtos_csv_para_bd
+from servicos.servico_scraping import executar_scraping_e_gerar_csv
+from visualizacoes.menu_caixa import menu_abrir_caixa
+from servicos.servico_atendimento import processar_atendimento_loop
 
 def principal():
     try:
